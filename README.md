@@ -13,4 +13,6 @@ A command line service that outputs a digest of outstanding issues for the curre
 Note: `babel-node` is a developer command from https://babeljs.io/docs/usage/cli/
 
 ### Real World Usage
-![Slack](http://i.imgur.com/vZKz2Ej.png)
+
+#### Slack
+![Slack](http://i.imgur.com/prk4h9w.png)
