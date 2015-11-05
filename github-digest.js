@@ -45,11 +45,6 @@ function api(methodName, argumentName, config) {
                 return reject(err);
             }
 
-            // no items?
-            if (res.length === 0) {
-                return reject(new Error(`no response items from ${methodName}.${argumentName}`));
-            }
-
             resolve(res);
         });
     });
@@ -78,16 +73,19 @@ api('issues', 'getAllMilestones', {
 }).then((milestones) => {
     targetMilestones = milestones;
 
-    // get issues for first milestone
-    return api('issues', 'repoIssues', {
-        user: name,
-        repo: repo,
-        milestone: targetMilestones[0].number,
-        state: 'open',
-        sort: 'created',
-        direction: 'desc',
-        per_page: 100
-    });
+    // only get issues if there's at least 1 valid milestone
+    if (targetMilestones[0]) {
+        // get issues for first milestone
+        return api('issues', 'repoIssues', {
+            user: name,
+            repo: repo,
+            milestone: targetMilestones[0].number,
+            state: 'open',
+            sort: 'created',
+            direction: 'desc',
+            per_page: 100
+        });
+    }
 }).then((firstMilestoneIssues) => {
     // get issues in a presentable text format
     let stdoutIssues = firstMilestoneIssues.reduce((str, issue, index) => {
