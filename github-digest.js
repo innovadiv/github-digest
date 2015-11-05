@@ -3,7 +3,9 @@ let GitHubApi = require('github');
 // get user and pass
 let user = process.argv[2];
 let pass = process.argv[3];
-let debug = process.argv[4];
+let name = process.argv[4]; // github target user or org
+let repo = process.argv[5];
+let debug = process.argv[6];
 
 // out
 let stdout = '';
@@ -55,8 +57,8 @@ function api(methodName, argumentName, config) {
 
 // run
 api('issues', 'getAllMilestones', {
-    user: 'innovadiv',
-    repo: 'innovadiv-com',
+    user: name,
+    repo: repo,
     state: 'open',
     sort: 'due_date'
 }).then((milestones) => {
@@ -78,8 +80,8 @@ api('issues', 'getAllMilestones', {
 
     // get issues for first milestone
     return api('issues', 'repoIssues', {
-        user: 'innovadiv',
-        repo: 'innovadiv-com',
+        user: name,
+        repo: repo,
         milestone: targetMilestones[0].number,
         state: 'open',
         sort: 'created',
