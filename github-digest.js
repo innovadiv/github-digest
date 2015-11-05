@@ -6,7 +6,7 @@ let pass = process.argv[3];
 let debug = process.argv[4];
 
 // out
-let stdout = '<!channel> GitHub Issues Daily Digest\n';
+let stdout = '';
 let targetMilestones = [];
 
 // consts
