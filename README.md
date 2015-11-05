@@ -1,6 +1,6 @@
 # GitHub Digest Service
 
-A command line service for anyone wanting a digest of outstanding issues of the current milestone.
+A command line service that outputs a digest of outstanding issues for the current milestone.
 
 ### Usage
 
