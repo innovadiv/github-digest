@@ -96,7 +96,7 @@ api('issues', 'getAllMilestones', {
     targetMilestones.forEach((milestone, index) => {
         // detailed report on the immediate milestone information
         if (index === 0) {
-            let complete = (milestone.open_issues / (milestone.open_issues + milestone.closed_issues)) * 100;
+            let complete = Math.round((milestone.closed_issues / (milestone.open_issues + milestone.closed_issues)) * 100);
 
             stdout += `*${milestone.title} milestone is* \`${complete}%\` *complete with* \`${milestone.open_issues} issues open\`\n\`\`\`${stdoutIssues}\`\`\` `;
             stdout += `${milestone.html_url}\n`
