@@ -1,0 +1,1 @@
+babel github-digest.js --out-file github-digest.compiled.js
