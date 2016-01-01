@@ -93,7 +93,9 @@ api('issues', 'getAllMilestones', {
 }).then(function (firstMilestoneIssues) {
     // get issues in a presentable text format
     var stdoutIssues = firstMilestoneIssues.reduce(function (str, issue, index) {
-        return '' + str + (index > 0 ? '\n' : '') + '#' + issue.number + ' - ' + issue.title.trim() + ' - ' + issue.assignee.login;
+        var assignee = issue.assignee ? issue.assignee.login : 'Not Assigned';
+
+        return '' + str + (index > 0 ? '\n' : '') + '#' + issue.number + ' - ' + issue.title.trim() + ' - ' + assignee;
     }, '');
 
     // iterate over milestones and output
@@ -112,4 +114,8 @@ api('issues', 'getAllMilestones', {
 
     // write
     process.stdout.write(stdout);
+})['catch'](function (e) {
+    if (debug) {
+        console.error(e);
+    }
 });

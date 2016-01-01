@@ -89,7 +89,9 @@ api('issues', 'getAllMilestones', {
 }).then((firstMilestoneIssues) => {
     // get issues in a presentable text format
     let stdoutIssues = firstMilestoneIssues.reduce((str, issue, index) => {
-        return `${str}${index > 0 ? '\n' : ''}#${issue.number} - ${issue.title.trim()} - ${issue.assignee.login}`;
+        let assignee = issue.assignee ? issue.assignee.login : 'Not Assigned';
+
+        return `${str}${index > 0 ? '\n' : ''}#${issue.number} - ${issue.title.trim()} - ${assignee}`;
     }, '');
 
     // iterate over milestones and output
@@ -107,4 +109,8 @@ api('issues', 'getAllMilestones', {
 
     // write
     process.stdout.write(stdout);
+}).catch((e) => {
+    if (debug) {
+        console.error(e);
+    }
 });
